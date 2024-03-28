@@ -28,7 +28,7 @@
 #endif
 
 /* セーブデータの互換性バージョン(12.42で導入) */
-#define SAVE_VER	(0xabcd1727)
+#define SAVE_VER	(0xabcd1732)
 
 #ifdef SUIKA_TARGET_WASM
 #include <emscripten/emscripten.h>

@@ -31,7 +31,9 @@
 #define CL_CHARACTERS	CH_CENTER
 #define CL_BG		(CL_CHARACTERS + 1)
 #define CL_LAYERS	(CL_BG + 1)
+#define CL_NOTFOUND	(-1)
 #define CL_ALL		(-2)
+#define CL_ERROR	(-3)
 
 /* Anime Sequece Size */
 #define CL_SEQ_SIZE	32
@@ -74,6 +76,7 @@ static struct op_func op_func_tbl[] = {
 
 /*
  * Temporary Stage
+ *  - TODO: move this struct to ciel.h, then move serializer/deserializer to save.c
  */
 
 struct temporary_stage {
@@ -135,7 +138,7 @@ static void render(void);
 static void render_fade_frame(void);
 static void render_anime_frame(void);
 static void process_anime_finish(void);
-static int get_index_for_name(bool allow_bg, bool allow_all);
+static int get_index_for_name(bool allow_bg, bool allow_all, bool allow_notfound);
 
 /*
  * The implementation of the @cl.* commands.
@@ -199,7 +202,7 @@ static bool init_cl_enter(bool *cont)
 		return false;
 	}
 
-	if (get_index_for_name(false, false) != -1) {
+	if (get_index_for_name(false, false, true) != CL_NOTFOUND) {
 		log_error("Character already exists.");
 		log_script_exec_footer();
 		return false;
@@ -225,8 +228,8 @@ static bool init_cl_leave(bool *cont)
 {
 	int i, index;
 
-	index = get_index_for_name(false, true);
-	if (index == -1)
+	index = get_index_for_name(false, true, false);
+	if (index == CL_ERROR)
 		return false;
 
 	for (i = 0; i < CL_CHARACTERS; i++) {
@@ -263,8 +266,8 @@ static bool init_cl_file(bool *cont)
 	const char *file;
 	int index;
 
-	index = get_index_for_name(true, false);
-	if (index == -1)
+	index = get_index_for_name(true, false, false);
+	if (index == CL_NOTFOUND || index == CL_ERROR)
 		return false;
 
 	file = get_string_param(CIEL_PARAM_FILE);
@@ -303,8 +306,8 @@ static bool init_cl_pos(bool *cont)
 	const char *align, *valign, *xequal, *xplus, *xminus, *yequal, *yplus, *yminus;
 	int index;
 
-	index = get_index_for_name(true, false);
-	if (index == -1)
+	index = get_index_for_name(true, false, false);
+	if (index == CL_ERROR || index == CL_NOTFOUND)
 		return false;
 	align = get_string_param(CIEL_PARAM_ALIGN);
 	valign = get_string_param(CIEL_PARAM_VALIGN);
@@ -363,8 +366,8 @@ static bool init_cl_alpha(bool *cont)
 	const char *alpha;
 	int index;
 
-	index = get_index_for_name(true, false);
-	if (index == -1)
+	index = get_index_for_name(true, false, false);
+	if (index == CL_NOTFOUND || index == CL_ERROR)
 		return false;
 	alpha = get_string_param(CIEL_PARAM_ALPHA);
 
@@ -385,8 +388,8 @@ static bool init_cl_dim(bool *cont)
 	const char *dim;
 	int index;
 
-	index = get_index_for_name(false, false);
-	if (index == -1)
+	index = get_index_for_name(false, false, false);
+	if (index == CL_ERROR || index == CL_NOTFOUND)
 		return false;
 	dim = get_string_param(CIEL_PARAM_DIM);
 
@@ -438,8 +441,8 @@ static bool init_cl_move(bool *cont)
 	const char *time, *xequal, *xplus, *xminus, *yequal, *yplus, *yminus, *alpha;
 	int index, seq;
 
-	index = get_index_for_name(true, false);
-	if (index == -1)
+	index = get_index_for_name(true, false, false);
+	if (index == CL_ERROR || index == CL_NOTFOUND)
 		return false;
 	time = get_string_param(CIEL_PARAM_TIME);
 	if (IS_EMPTY(time)) {
@@ -834,7 +837,7 @@ static void process_anime_finish(void)
 	}
 }
 
-static int get_index_for_name(bool allow_bg, bool allow_all)
+static int get_index_for_name(bool allow_bg, bool allow_all, bool allow_notfound)
 {
 	const char *name;
 	int i;
@@ -843,21 +846,21 @@ static int get_index_for_name(bool allow_bg, bool allow_all)
 	if (IS_EMPTY(name)) {
 		log_error("name= is required");
 		log_script_exec_footer();
-		return false;
+		return CL_ERROR;
 	}
 
 	if (strcmp(name, "bg") == 0) {
 		if (allow_bg)
 			return CL_BG;
 		log_error("name=bg is not allowed.");
-		return false;
+		return CL_ERROR;
 	}
 
 	if (strcmp(name, "all") == 0) {
 		if (allow_all)
 			return CL_ALL;
 		log_error("name=all is not allowed.");
-		return false;
+		return CL_ERROR;
 	}
 
 	for (i = 0; i < CL_CHARACTERS; i++) {
@@ -865,10 +868,13 @@ static int get_index_for_name(bool allow_bg, bool allow_all)
 			return i;
 	}
 
-	log_error("No character named %d", name);
-	log_script_exec_footer();
+	if (!allow_notfound) {
+		log_error("No character named %d", name);
+		log_script_exec_footer();
+		return CL_ERROR;
+	}
 
-	return false;
+	return CL_NOTFOUND;
 }
 
 /*
@@ -881,7 +887,9 @@ bool ciel_serialize_hook(struct wfile *wf)
 	size_t len;
 	int i, val;
 
+	/* For each character. */
 	for (i = 0; i < CL_CHARACTERS; i++) {
+		/* name */
 		name = ts.name[i];
 		if (name == NULL)
 			name = "";
@@ -889,28 +897,44 @@ bool ciel_serialize_hook(struct wfile *wf)
 		if (write_wfile(wf, name, len) < len)
 			return false;
 
+		/* x */
 		val = ts.x[i];
 		if (write_wfile(wf, &val, sizeof(val)) < sizeof(val))
 			return false;
 
+		/* y */
 		val = ts.y[i];
 		if (write_wfile(wf, &val, sizeof(val)) < sizeof(val))
 			return false;
 
+		/* a */
 		val = ts.a[i];
 		if (write_wfile(wf, &val, sizeof(val)) < sizeof(val))
 			return false;
 
+		/* dim */
 		val = ts.dim[i] ? 1 : 0;
 		if (write_wfile(wf, &val, sizeof(val)) < sizeof(val))
 			return false;
-
 	}
 
+	/* bg */
+	val = ts.x[CL_BG];
+	if (write_wfile(wf, &val, sizeof(val)) < sizeof(val))
+		return false;
+	val = ts.y[CL_BG];
+	if (write_wfile(wf, &val, sizeof(val)) < sizeof(val))
+		return false;
+	val = ts.a[CL_BG];
+	if (write_wfile(wf, &val, sizeof(val)) < sizeof(val))
+		return false;
+
+	/* effect */
 	val = ts.effect;
 	if (write_wfile(wf, &val, sizeof(val)) < sizeof(val))
 		return false;
 
+	/* rule */
 	name = ts.rule_file;
 	if (name == NULL)
 		name = "none";
@@ -928,9 +952,11 @@ bool ciel_deserialize_hook(struct rfile *rf)
 
 	ts.is_modified = false;
 
+	/* For each character. */
 	for (i = 0; i < CL_CHARACTERS; i++) {
 		ts.is_file_changed[i] = false;
 
+		/* name */
 		if (ts.name[i] != NULL) {
 			free(ts.name[i]);
 			ts.name[i] = NULL;
@@ -939,29 +965,47 @@ bool ciel_deserialize_hook(struct rfile *rf)
 			ts.name[i] = strdup(name);
 			if (ts.name[i] == NULL)
 				return false;
+
 		}
 
+		/* x */
 		if (read_rfile(rf, &val, sizeof(val)) < sizeof(val))
 			return false;
 		ts.x[i] = val;
 
+		/* y */
 		if (read_rfile(rf, &val, sizeof(val)) < sizeof(val))
 			return false;
 		ts.y[i] = val;
 
+		/* a */
 		if (read_rfile(rf, &val, sizeof(val)) < sizeof(val))
 			return false;
 		ts.a[i] = val;
 
+		/* dim */
 		if (read_rfile(rf, &val, sizeof(val)) < sizeof(val))
 			return false;
 		ts.dim[i] = val ? true : false;
 	}
 
+	/* bg */
+	if (read_rfile(rf, &val, sizeof(val)) < sizeof(val))
+		return false;
+	ts.x[CL_BG] = val;
+	if (read_rfile(rf, &val, sizeof(val)) < sizeof(val))
+		return false;
+	ts.y[CL_BG] = val;
+	if (read_rfile(rf, &val, sizeof(val)) < sizeof(val))
+		return false;
+	ts.a[CL_BG] = val;
+
+	/* effect */
 	if (read_rfile(rf, &val, sizeof(val)) < sizeof(val))
 		return false;
 	ts.effect = val;
 
+	/* rule */
 	if (ts.rule_file != NULL) {
 		free(ts.rule_file);
 		ts.rule_file = NULL;
