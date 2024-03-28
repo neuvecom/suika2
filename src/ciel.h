@@ -17,6 +17,7 @@
 
 #include "file.h"
 
+void ciel_clear_hook(void);
 bool ciel_serialize_hook(struct wfile *wf);
 bool ciel_deserialize_hook(struct rfile *rf);
 

@@ -304,7 +304,7 @@ static bool init_cl_file(bool *cont)
 static bool init_cl_pos(bool *cont)
 {
 	const char *align, *valign, *xequal, *xplus, *xminus, *yequal, *yplus, *yminus;
-	int index;
+	int index, w, h;
 
 	index = get_index_for_name(true, false, false);
 	if (index == CL_ERROR || index == CL_NOTFOUND)
@@ -318,14 +318,29 @@ static bool init_cl_pos(bool *cont)
 	yplus = get_string_param(CIEL_PARAM_YPLUS);
 	yminus = get_string_param(CIEL_PARAM_YMINUS);
 
+	if (ts.img[index] != NULL) {
+		w = ts.img[index]->width;
+		h = ts.img[index]->height;
+	} else{
+		struct image *img;
+		img = get_layer_image(cl_layer_to_stage_layer(index));
+		if (img == NULL) {
+			log_error("No image loaded.");
+			return false;
+		}
+		w = img->width;
+		h = img->height;
+	}
+		
+
 	ts.is_modified = true;
 	if (!IS_EMPTY(align)) {
 		if (strcmp(align, "left") == 0) {
 			ts.x[index] = 0;
 		} else if (strcmp(align, "right") == 0) {
-			ts.x[index] = conf_window_width - ts.img[index]->width;
+			ts.x[index] = conf_window_width - w;
 		} else if (strcmp(align, "center") == 0) {
-			ts.x[index] = (conf_window_width - ts.img[index]->width) / 2;
+			ts.x[index] = (conf_window_width - w) / 2;
 		} else {
 			log_error("align=%s is not supported.", align);
 			return false;
@@ -335,9 +350,9 @@ static bool init_cl_pos(bool *cont)
 		if (strcmp(valign, "top") == 0) {
 			ts.y[index] = 0;
 		} else if (strcmp(align, "bottom") == 0) {
-			ts.y[index] = conf_window_height - ts.img[index]->height;
+			ts.y[index] = conf_window_height - h;
 		} else if (strcmp(align, "center") == 0) {
-			ts.y[index] = (conf_window_height - ts.img[index]->height) / 2;
+			ts.y[index] = (conf_window_height - h) / 2;
 		} else {
 			log_error("valign=%s is not supported.", valign);
 			return false;
@@ -869,7 +884,7 @@ static int get_index_for_name(bool allow_bg, bool allow_all, bool allow_notfound
 	}
 
 	if (!allow_notfound) {
-		log_error("No character named %d", name);
+		log_error("No character named %s", name);
 		log_script_exec_footer();
 		return CL_ERROR;
 	}
@@ -881,9 +896,68 @@ static int get_index_for_name(bool allow_bg, bool allow_all, bool allow_notfound
  * Save / Load
  */
 
+void ciel_clear_hook(void)
+{
+	int i;
+
+	/* stage modified flag */
+	ts.is_modified = false;
+
+	/* For each character. */
+	for (i = 0; i < CL_LAYERS; i++) {
+		/* name */
+		if (i < CL_CHARACTERS) {
+			if (ts.name[i] != NULL) {
+				free(ts.name[i]);
+				ts.name[i] = NULL;
+			}
+		}
+
+		/* file */
+		if (ts.file[i] != NULL) {
+			free(ts.file[i]);
+			ts.file[i] = NULL;
+		}
+		ts.is_file_changed[i] = false;
+		if (ts.img[i] != NULL) {
+			destroy_image(ts.img[i]);
+			ts.img[i] = NULL;
+		}
+
+		/* x, y, a */
+		ts.x[i] = 0;
+		ts.y[i] = 0;
+		ts.a[i] = 0;
+
+		/* dim */
+		if (i < CL_CHARACTERS)
+			ts.dim[i] = false;
+	}
+
+	/* character count */
+	ts.ch_count = 0;
+	
+	/* effect */
+	ts.effect = FADE_METHOD_NORMAL;
+	if (ts.rule_file != NULL) {
+		free(ts.rule_file);
+		ts.rule_file = NULL;
+	}
+	if (ts.rule_img != NULL) {
+		destroy_image(ts.rule_img);
+		ts.rule_img = NULL;
+	}
+
+	/* anime */
+	ts.use_anime = false;
+	for (i = 0; i < CL_LAYERS; i++)
+		ts.anime_seq_count[i] = 0;
+}
+
 bool ciel_serialize_hook(struct wfile *wf)
 {
 	const char *name;
+	float fval;
 	size_t len;
 	int i, val;
 
@@ -934,6 +1008,11 @@ bool ciel_serialize_hook(struct wfile *wf)
 	if (write_wfile(wf, &val, sizeof(val)) < sizeof(val))
 		return false;
 
+	/* time */
+	fval = ts.time;
+	if (write_wfile(wf, &fval, sizeof(fval)) < sizeof(fval))
+		return false;
+
 	/* rule */
 	name = ts.rule_file;
 	if (name == NULL)
@@ -948,9 +1027,10 @@ bool ciel_serialize_hook(struct wfile *wf)
 bool ciel_deserialize_hook(struct rfile *rf)
 {
 	char name[1024];
+	float fval;
 	int i, val;
 
-	ts.is_modified = false;
+	ciel_clear_hook();
 
 	/* For each character. */
 	for (i = 0; i < CL_CHARACTERS; i++) {
@@ -1004,6 +1084,11 @@ bool ciel_deserialize_hook(struct rfile *rf)
 	if (read_rfile(rf, &val, sizeof(val)) < sizeof(val))
 		return false;
 	ts.effect = val;
+
+	/* time */
+	if (read_rfile(rf, &fval, sizeof(fval)) < sizeof(fval))
+		return false;
+	ts.time = fval;
 
 	/* rule */
 	if (ts.rule_file != NULL) {

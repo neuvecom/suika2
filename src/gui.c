@@ -1508,6 +1508,9 @@ static bool move_to_title(void)
 	/* ステージをクリアする */
 	clear_stage();
 
+	/* Cielの状態をクリアする */
+	ciel_clear_hook();
+
 	/* ローカル変数をクリアする */
 	for (i = 0; i < LOCAL_VAR_SIZE; i++)
 		set_variable(i, 0);
