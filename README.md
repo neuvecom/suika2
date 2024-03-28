@@ -78,7 +78,7 @@ Our community is a cherished and invaluable space that embraces developers, crea
 That's why we'd love you to join our community!
 You're definitely deserved to be a part of it.
 
-<a href="https://discord.gg/ZmvXxE8GFg"><img src="https://discordapp.com/api/guilds/986623112617541677/widget.png?style=banner1"></a>
+<a href="https://discord.gg/EzCxCh3f">
 
 We hold a grand vision for cultural growth and engage in profound discussions, but at our core, we are simply developers and creators, so we are always interested in dialogue and conversation!
 
