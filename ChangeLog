@@ -5,12 +5,17 @@ This file is referred by some automatic release scripts.
 [Release History (Japanese)]
 
 <!-- BEGIN-LATEST-JP -->
+<li>Suika2/17.34 2024/3/29
+  <ul>
+    <li>目パチ画像をWindows/Macの両方できれいに動くように調整</li>
+  </ul>
+</li>
+<!-- END-LATEST-JP -->
 <li>Suika2/17.33 2024/3/28
   <ul>
     <li>Cielのバグ修正</li>
   </ul>
 </li>
-<!-- END-LATEST-JP -->
 <li>Suika2/17.32 2024/3/28
   <ul>
     <li>Cielのバグ修正</li>
@@ -1891,12 +1896,17 @@ This file is referred by some automatic release scripts.
 [Release History (English)]
 
 <!-- BEGIN-LATEST-EN -->
+<li>Suika2/17.34 2024/3/29
+  <ul>
+    <li>Adjusted an eye-blinking image for both Windows and Mac</li>
+  </ul>
+</li>
+<!-- END-LATEST-EN -->
 <li>Suika2/17.33 2024/3/28
   <ul>
     <li>Fixed Ciel bugs</li>
   </ul>
 </li>
-<!-- END-LATEST-EN -->
 <li>Suika2/17.32 2024/3/28
   <ul>
     <li>Fixed Ciel bugs</li>
