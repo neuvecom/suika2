@@ -13,7 +13,6 @@
   <!-- HTML Card -->
   <title>Suika2 | 素材ダウンロード</title>
   <meta name="description" content="Suika2はノベルアプリ(スマートフォンのノベルゲーム)を制作するためのツールです。">
-  <meta name="theme-color" content="#eb8334">
 
 	<!-- INSERT-GTAG-HERE -->
 </head>
@@ -93,6 +92,14 @@
 			<div class="col-md">
 				<h1>Suika2 素材ダウンロード</h1>
 				<p>Suika2で利用できる素材のダウンロードページです。</p>
+
+				<form action="/wiki/?cmd=search" method="post">
+					<div><input type="hidden" name="encode_hint" value="ぷ" /></div>
+					<div>
+						<input type="text"  name="word" value="" size="20" />
+						&nbsp;<input type="submit" value="サイト内検索" />
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>

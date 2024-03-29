@@ -6,7 +6,6 @@
 
   <title>Suika2 Wiki | <?php echo $title ?></title>
   <meta name="description" content="Suika2 ユーザ Wiki">
-  <meta name="theme-color" content="#eb8334">
 
   <!-- Bootstrap -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
@@ -116,6 +115,15 @@
 <?php } ?>
 
 				</p>
+
+				<form action="/wiki/?cmd=search" method="post">
+					<div><input type="hidden" name="encode_hint" value="ぷ" /></div>
+					<div>
+						<input type="text"  name="word" value="" size="20" />
+						&nbsp;<input type="submit" value="サイト内検索" />
+					</div>
+				</form>
+
 			</div>
 		</div>
 	</div>
