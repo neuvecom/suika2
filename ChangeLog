@@ -5,12 +5,17 @@ This file is referred by some automatic release scripts.
 [Release History (Japanese)]
 
 <!-- BEGIN-LATEST-JP -->
-<li>Suika2/17.35 2024/3/30
+<li>Suika2/17.36 2024/3/30
   <ul>
     <li>縦書きUIの完成 (by あさつき)</li>
   </ul>
 </li>
 <!-- END-LATEST-JP -->
+<li>Suika2/17.35 2024/3/30
+  <ul>
+    <li>縦書きUIの完成 (by あさつき)</li>
+  </ul>
+</li>
 <li>Suika2/17.34 2024/3/29
   <ul>
     <li>目パチ画像をWindows/Macの両方できれいに動くように調整</li>
@@ -1901,12 +1906,17 @@ This file is referred by some automatic release scripts.
 [Release History (English)]
 
 <!-- BEGIN-LATEST-EN -->
-<li>Suika2/17.35 2024/3/30
+<li>Suika2/17.36 2024/3/30
   <ul>
     <li>Completion of The Japanese Vertical Template (by Asatsuki)</li>
   </ul>
 </li>
 <!-- END-LATEST-EN -->
+<li>Suika2/17.35 2024/3/30
+  <ul>
+    <li>Completion of The Japanese Vertical Template (by Asatsuki)</li>
+  </ul>
+</li>
 <li>Suika2/17.34 2024/3/29
   <ul>
     <li>Adjusted an eye-blinking image for both Windows and Mac</li>
