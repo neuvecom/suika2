@@ -33,9 +33,9 @@ font.color.g=255
 font.color.b=255
 
 # フォントの縁取りの色
-font.outline.color.r=128
-font.outline.color.g=128
-font.outline.color.b=128
+font.outline.color.r=0
+font.outline.color.g=0
+font.outline.color.b=0
 
 # アウトラインを取り除くか(0:アウトラインあり, 1:アウトラインなし)
 font.outline.remove=0
@@ -74,23 +74,23 @@ msgbox.tategaki=1
 msgbox.bg.file=system/msgbox/idle.png
 
 # メッセージボックスの前景の画像ファイル名
-msgbox.fg.file=system/msgbox/idle.png
+msgbox.fg.file=system/msgbox/hover.png
 
 # メッセージボックス画像を表示する位置
 msgbox.x=0
 msgbox.y=0
 
 # メッセージボックス画像内のテキスト左端マージン
-msgbox.margin.left=80
+msgbox.margin.left=290
 
 # メッセージボックス画像内のテキスト上端マージン
-msgbox.margin.top=50
+msgbox.margin.top=38
 
 # メッセージボックス画像内のテキスト右端マージン
-msgbox.margin.right=80
+msgbox.margin.right=220
 
 # メッセージボックス画像内のテキスト下端マージン
-msgbox.margin.bottom=80
+msgbox.margin.bottom=55
 
 # メッセージの行間
 msgbox.margin.line=55
@@ -100,10 +100,10 @@ msgbox.speed=40.0
 
 # [サンプルでは未使用]
 # メッセージボックスを非表示にするボタンの座標(メッセージボックス内の座標, 省略可)
-# msgbox.btn.hide.x=0
-# msgbox.btn.hide.y=0
-# msgbox.btn.hide.width=0
-# msgbox.btn.hide.height=0
+msgbox.btn.hide.x=216
+msgbox.btn.hide.y=277
+msgbox.btn.hide.width=67
+msgbox.btn.hide.height=65
 
 # [サンプルでは未使用]
 # メッセージボックス内のセーブボタンの座標(メッセージボックス内の座標, 省略可)
@@ -135,17 +135,17 @@ msgbox.speed=40.0
 
 # [サンプルでは未使用]
 # メッセージボックス内のオートボタンの座標(メッセージボックス内の座標, 省略可)
-# msgbox.btn.auto.x=0
-# msgbox.btn.auto.y=0
-# msgbox.btn.auto.width=0
-# msgbox.btn.auto.height=0
+msgbox.btn.auto.x=216
+msgbox.btn.auto.y=201
+msgbox.btn.auto.width=67
+msgbox.btn.auto.height=67
 
 # [サンプルでは未使用]
 # メッセージボックス内のスキップボタンの座標(メッセージボックス内の座標, 省略可)
-# msgbox.btn.skip.x=0
-# msgbox.btn.skip.y=0
-# msgbox.btn.skip.width=0
-# msgbox.btn.skip.height=0
+msgbox.btn.skip.x=216
+msgbox.btn.skip.y=129
+msgbox.btn.skip.width=67
+msgbox.btn.skip.height=64
 
 # [サンプルでは未使用]
 # メッセージボックス内のログボタンの座標(メッセージボックス内の座標, 省略可)
@@ -268,8 +268,8 @@ save.data.thumb.height=120
 ###
 
 # システムメニュー画像の座標
-sysmenu.x=731
-sysmenu.y=29
+sysmenu.x=0
+sysmenu.y=0
 
 # システムメニュー画像(通常時)のファイル名
 sysmenu.idle.file=system/sysmenu/idle.png
@@ -281,52 +281,52 @@ sysmenu.hover.file=system/sysmenu/hover.png
 sysmenu.disable.file=system/sysmenu/disable.png
 
 # システムメニューのクイックセーブボタンの座標(システムメニュー画像内での座標)
-sysmenu.qsave.x=62
-sysmenu.qsave.y=7
-sysmenu.qsave.width=60
-sysmenu.qsave.height=58
+sysmenu.qsave.x=0
+sysmenu.qsave.y=0
+sysmenu.qsave.width=0
+sysmenu.qsave.height=0
 
 # システムメニューのクイックロードボタンの座標(システムメニュー画像内での座標)
-sysmenu.qload.x=123
-sysmenu.qload.y=7
-sysmenu.qload.width=60
-sysmenu.qload.height=58
+sysmenu.qload.x=0
+sysmenu.qload.y=0
+sysmenu.qload.width=0
+sysmenu.qload.height=0
 
 # システムメニューのセーブボタンの座標(システムメニュー画像内での座標)
-sysmenu.save.x=184
-sysmenu.save.y=7
-sysmenu.save.width=60
-sysmenu.save.height=58
+sysmenu.save.x=0
+sysmenu.save.y=126
+sysmenu.save.width=312
+sysmenu.save.height=70
 
 # システムメニューのロードボタンの座標(システムメニュー画像内での座標)
-sysmenu.load.x=245
-sysmenu.load.y=7
-sysmenu.load.width=60
-sysmenu.load.height=58
+sysmenu.load.x=0
+sysmenu.load.y=245
+sysmenu.load.width=312
+sysmenu.load.height=70
 
 # システムメニューのオートボタンの座標(システムメニュー画像内での座標)
-sysmenu.auto.x=306
-sysmenu.auto.y=7
-sysmenu.auto.width=60
-sysmenu.auto.height=58
+sysmenu.auto.x=0
+sysmenu.auto.y=358
+sysmenu.auto.width=140
+sysmenu.auto.height=70
 
 # システムメニューのスキップボタンの座標(システムメニュー画像内での座標)
-sysmenu.skip.x=367
-sysmenu.skip.y=7
-sysmenu.skip.width=60
-sysmenu.skip.height=58
+sysmenu.skip.x=141
+sysmenu.skip.y=358
+sysmenu.skip.width=170
+sysmenu.skip.height=70
 
 # システムメニューのヒストリボタンの座標(システムメニュー画像内での座標)
-sysmenu.history.x=428
-sysmenu.history.y=7
-sysmenu.history.width=60
-sysmenu.history.height=58
+sysmenu.history.x=0
+sysmenu.history.y=473
+sysmenu.history.width=312
+sysmenu.history.height=70
 
 # システムメニューのコンフィグボタンの座標(システムメニュー画像内での座標)
-sysmenu.config.x=489
-sysmenu.config.y=7
-sysmenu.config.width=60
-sysmenu.config.height=58
+sysmenu.config.x=0
+sysmenu.config.y=592
+sysmenu.config.width=312
+sysmenu.config.height=70
 
 # システムメニューを呼び出すときのSE(省略可)
 sysmenu.enter.se=click.ogg
@@ -363,8 +363,8 @@ sysmenu.config.se=click.ogg
 
 # 折りたたみシステムメニュー画像の座標
 # [画面の外側を指定して見えなくする]
-sysmenu.collapsed.x=1280
-sysmenu.collapsed.y=0
+sysmenu.collapsed.x=215
+sysmenu.collapsed.y=48
 
 # 折りたたみシステムメニュー画像(通常時)のファイル名
 sysmenu.collapsed.idle.file=system/sysmenu-collapsed/idle.png
@@ -386,8 +386,8 @@ sysmenu.hidden=0
 automode.banner.file=system/auto/auto.png
 
 # オートモードバナーの座標
-automode.banner.x=0
-automode.banner.y=126
+automode.banner.x=1114
+automode.banner.y=36
 
 # オートモードのスピード(1文字あたりx秒待つ)
 automode.speed=0.15
@@ -400,8 +400,8 @@ automode.speed=0.15
 skipmode.banner.file=system/skip/skip.png
 
 # スキップモードバナーの座標
-skipmode.banner.x=0
-skipmode.banner.y=186
+skipmode.banner.x=1114
+skipmode.banner.y=36
 
 ###
 ### システムGUIの設定
@@ -463,7 +463,7 @@ gui.history.margin.line=55
 # [ヒストリの縦書き] (省略可)
 #  - 0: 横書き
 #  - 1: 縦書き
-gui.history.tategaki=0
+gui.history.tategaki=1
 
 # [ヒストリでカラーを無効にする] (省略可)
 #  - 0: カラーを有効にする
@@ -486,12 +486,12 @@ gui.history.quote.end=」
 # [ヒストリーの最後の項目を表示しない調整を行う]
 #  - 0: 調整を行わない
 #  - 1: 調整を行う (最後の項目を表示しない)
-gui.history.ignore.last=0
+gui.history.ignore.last=1
 
 # [プレビューの縦書き] (省略可)
 #  - 0: 横書き
 #  - 1: 縦書き
-gui.preview.tategaki=0
+gui.preview.tategaki=1
 
 ###
 ### 音量の初期値

@@ -164,6 +164,9 @@ static bool is_continue_mode;
 /* 重ね塗りしているか (将来、色のエスケープシーケンスを無視するため) */
 static bool is_dimming;
 
+/* dimを回避するか(ロード時) */
+static bool avoid_dimming;
+
 /*
  * ボイス
  */
@@ -749,6 +752,7 @@ static void init_flags_and_vars(void)
 	/* 重ね塗り(dimming)でない状態にする */
 	need_dimming = false;
 	is_dimming = false;
+	avoid_dimming = false;
 
 	/* インラインウェイトでない状態にする */
 	is_inline_wait = false;
@@ -1032,8 +1036,10 @@ static bool init_msg_top(void)
 	}
 
 	/* ロードで開始された場合は、行継続モードを解除する */
+#if 0
 	if (load_flag && is_continue_mode)
 		is_continue_mode = false;
+#endif
 
 	return true;
 }
@@ -1241,6 +1247,8 @@ static void init_msgbox(void)
 	/* 行継続でなければ、メッセージレイヤをクリアする */
 	if (!is_continue_mode)
 		fill_msgbox();
+	else
+		blit_pending_message();
 
 	/* メッセージレイヤを可視にする */
 	show_msgbox(true);
@@ -2482,9 +2490,6 @@ static int get_pointed_sysmenu_item_extended(void)
 /* フレーム描画を行う */
 static void blit_frame(void)
 {
-	/* ロード直後にdim部分のテキストを描画する */
-	blit_pending_message();
-
 	/* メッセージボックス非表示中は処理しない */
 	if (is_hidden)
 		return;
@@ -2525,13 +2530,39 @@ static void blit_frame(void)
 static void blit_pending_message(void)
 {
 	struct draw_msg_context text_context;
-	const char *text;
+	char *text;
+	pixel_t save_body_color, save_body_outline_color;
 	int len;
 
 	text = get_pending_message();
 	if (text == NULL)
 		return;
 
+	fill_msgbox();
+
+	if (!conf_msgbox_tategaki) {
+		pen_x = conf_msgbox_margin_left;
+		pen_y = conf_msgbox_margin_top;
+	} else {
+		pen_x = msgbox_w - conf_msgbox_margin_right -
+			conf_font_size;
+		pen_y = conf_msgbox_margin_top;
+	}
+	orig_pen_x = pen_x;
+	orig_pen_y = pen_y;
+
+	save_body_color = body_color;
+	save_body_outline_color = body_outline_color;
+	body_color = make_pixel(0xff,
+				(uint32_t)conf_msgbox_dim_color_r,
+				(uint32_t)conf_msgbox_dim_color_g,
+				(uint32_t)conf_msgbox_dim_color_b);
+	body_outline_color = make_pixel(0xff,
+					(uint32_t)conf_msgbox_dim_color_outline_r,
+					(uint32_t)conf_msgbox_dim_color_outline_g,
+					(uint32_t)conf_msgbox_dim_color_outline_b);
+	if (conf_font_outline_remove)
+		body_outline_color = body_color;
 	construct_draw_msg_context(
 		&text_context,
 		LAYER_MSG,
@@ -2570,7 +2601,13 @@ static void blit_pending_message(void)
 	len = count_chars_common(&text_context);
 	draw_msg_common(&text_context, len);
 
-	get_pen_position_common(&msgbox_context, &pen_x, &pen_y);
+	get_pen_position_common(&text_context, &pen_x, &pen_y);
+
+	free(text);
+
+	body_color = save_body_color;
+	body_outline_color = save_body_outline_color;
+	avoid_dimming = true;
 }
 
 /* メッセージ本文の描画が完了しているか */
@@ -2819,7 +2856,7 @@ static void set_click(void)
 
 	/* 入力があったら繰り返しを終了する */
 	if (check_stop_click_animation()) {
-		if (conf_msgbox_dim)
+		if (conf_msgbox_dim && !avoid_dimming)
 			need_dimming = true;
 		stop();
 	}
@@ -3210,7 +3247,7 @@ static void stop(void)
 		return;
 	}
 
-	if (conf_msgbox_dim) {
+	if (conf_msgbox_dim && !avoid_dimming) {
 		need_dimming = true;
 	} else {
 		/* スキップモードでなければ */

@@ -28,7 +28,7 @@
 #endif
 
 /* セーブデータの互換性バージョン(12.42で導入) */
-#define SAVE_VER	(0xabcd1732)
+#define SAVE_VER	(0xabcd1735)
 
 #ifdef SUIKA_TARGET_WASM
 #include <emscripten/emscripten.h>
@@ -163,12 +163,18 @@ bool init_save(void)
 	}
 
 	/* 文字列を初期化する */
-	if (chapter_name != NULL)
+	if (chapter_name != NULL) {
 		free(chapter_name);
-	if (last_message != NULL)
+		chapter_name = NULL;
+	}
+	if (last_message != NULL) {
 		free(last_message);
-	if (prev_last_message != NULL)
+		last_message = NULL;
+	}
+	if (prev_last_message != NULL) {
 		free(prev_last_message);
+		prev_last_message = NULL;
+	}
 	chapter_name = strdup("");
 	last_message = strdup("");
 	if (chapter_name == NULL || last_message == NULL) {
@@ -519,10 +525,6 @@ static bool serialize_message(struct wfile *wf, int index)
 	const char *t;
 	size_t len;
 
-	/* メッセージの文字列を準備する */
-	strncpy(tmp_str, last_message, sizeof(tmp_str));
-	tmp_str[sizeof(tmp_str) - 1] = '\0';
-
 	/* メッセージを書き出す */
 	t = last_message != NULL ? last_message : "";
 	len = strlen(t) + 1;
@@ -534,8 +536,10 @@ static bool serialize_message(struct wfile *wf, int index)
 		if (save_message[index] != NULL)
 			free(save_message[index]);
 		save_message[index] = strdup(t);
-		if (save_message[index] == NULL)
+		if (save_message[index] == NULL) {
+			log_memory();
 			return false;
+		}
 	}
 
 	/* 継続行用のメッセージを書き出す */
@@ -1009,7 +1013,11 @@ static bool deserialize_all(const char *fname)
 			if (!set_chapter_name(tmp_str))
 				break;
 
-		/* 継続行用のメッセージを読み込む */
+		/* メッセージを読み込む(無視) */
+		if (gets_rfile(rf, tmp_str, sizeof(tmp_str)) == NULL)
+			break;
+
+		/* 直前の継続メッセージを読み込む */
 		gets_rfile(rf, tmp_str, sizeof(tmp_str));
 		if (strcmp(tmp_str, "") != 0) {
 			pending_message = strdup(tmp_str);
@@ -1432,6 +1440,10 @@ static void load_basic_save_data_file(struct rfile *rf, int index)
 		return;
 	}
 
+	/* 直前の継続メッセージを取得する */
+	if (gets_rfile(rf, tmp_str, sizeof(tmp_str)) == NULL)
+		return;
+
 	/* サムネイルを取得する */
 	img_size = (size_t)(conf_save_data_thumb_width *
 			    conf_save_data_thumb_height * 3);
@@ -1675,6 +1687,7 @@ bool set_last_message(const char *msg, bool is_append)
 			strcpy(new_text, last_message);
 			prev_last_message = last_message;
 			last_message = NULL;
+			strcat(new_text, msg);
 		} else {
 			strcpy(new_text, msg);
 		}
@@ -1748,14 +1761,20 @@ void clear_last_en_command(void)
  * メッセージボックスのテキスト
  */
 
-const char *get_pending_message(void)
+char *get_pending_message(void)
 {
-	const char *ret;
+	char *ret;
 
-	ret = pending_message;
 	if (pending_message != NULL) {
+		ret = strdup(pending_message);
+		if (ret == NULL) {
+			log_memory();
+			return NULL;
+		}
 		free(pending_message);
 		pending_message = NULL;
+	} else {
+		ret = NULL;
 	}
 
 	return ret;

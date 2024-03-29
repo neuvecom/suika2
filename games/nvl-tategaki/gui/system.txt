@@ -28,10 +28,10 @@ BACK {
     type: cancel;
 
     # 座標とサイズ
-    x: 1140;
-    y: 625;
-    width: 139;
-    height: 80;
+    x: 908;
+    y: 616;
+    width: 326;
+    height: 74;
 
     # ポイントされたときの効果音
     pointse: btn-change.ogg;
@@ -49,10 +49,10 @@ TEXTSPEED {
     type: textspeed;
 
     # 座標とサイズ
-    x: 68;
-    y: 250;
-    width: 266;
-    height: 21;
+    x: 567;
+    y: 270;
+    width: 379;
+    height: 65;
 
     # ポイントされたときの効果音
     pointse: btn-change.ogg;
@@ -67,10 +67,10 @@ AUTOSPEED {
     type: autospeed;
 
     # 座標とサイズ
-    x: 68;
-    y: 339;
-    width: 266;
-    height: 21;
+    x: 567;
+    y: 466;
+    width: 379;
+    height: 65;
 
     # ポイントされたときの効果音
     pointse: btn-change.ogg;    
@@ -85,13 +85,13 @@ PREVIEW {
     type: preview;
 
     # 表示するメッセージ
-    msg: "これはメッセージのプレビューです。スピードはよろしいですか？";
+    msg: "これはメッセージのプレビューです。";
 
     # 座標とサイズ
-    x: 442;
-    y: 453;
-    width: 590;
-    height: 120;
+    x: 1053;
+    y: 180;
+    width: 120;
+    height: 398;
 
     # 読み上げテキスト
     alt: テキストスピードのプレビューを表示するものです。;
@@ -103,10 +103,10 @@ BGM {
     type: bgmvol;
 
     # 座標とサイズ
-    x: 420;
-    y: 249;
-    width: 266;
-    height: 21;
+    x: 88;
+    y: 270;
+    width: 379;
+    height: 65;
 
     # ポイントされたときの効果音
     pointse: btn-change.ogg;
@@ -124,10 +124,10 @@ SE {
     file: click.ogg;
 
     # 座標とサイズ
-    x: 420;
-    y: 339;
-    width: 266;
-    height: 20;
+    x: 88;
+    y: 466;
+    width: 379;
+    height: 65;
 
     # ポイントされたときの効果音
     pointse: btn-change.ogg;
@@ -136,127 +136,16 @@ SE {
     alt: このボタンは効果音の音量を調整するものです。;
 }
 
-# ボイスのボリュームスライダー
-VOICE {
-    # Voice volume type
-    type: voicevol;
-
-    # スライダーが変更されたときに再生するCVファイル
-    file: 025.ogg;
-
-    # 座標とサイズ
-    x: 68;
-    y: 498;
-    width: 266;
-    height: 21;
-
-    # ポイントされたときの効果音
-    pointse: btn-change.ogg;
-
-    # 読み上げテキスト
-    alt: このボタンはボイスの音量を調整するものです。;
-}
-
-# フォント選択ボタン1
-FONT1 {
-    # 種類:フォント
-    type: font;
-
-    # 押されたときに変更するフォント
-    file: VL-PGothic-Regular.ttf;
-
-    # 座標とサイズ
-    x: 770;
-    y: 328;
-    width: 87;
-    height: 30;
-
-    # ポイントされたときの効果音
-    pointse: btn-change.ogg;
-
-    # クリックされたときの効果音
-    clickse: click.ogg;
-
-    # 読み上げテキスト
-    alt: このボタンはフォント1を選択するものです。;
-}
-
-# フォント選択ボタン1
-FONT2 {
-    # 種類:フォント
-    type: font;
-
-    # 押されたときに変更するフォント
-    file: yasashisa.ttf;
-
-    # 座標とサイズ
-    x: 900;
-    y: 328;
-    width: 95;
-    height: 27;
-
-    # ポイントされたときの効果音
-    pointse: btn-change.ogg;
-
-    # クリックされたときの効果音
-    clickse: click.ogg;
-
-    # 読み上げテキスト
-    alt: このボタンはフォント2を選択するものです。;
-}
-
-# フルスクリーンモードへの切り替えボタン
-FULLSCREEN {
-    # 種類:フルスクリーン
-    type: fullscreen;
-
-    # 座標とサイズ
-    x: 750;
-    y: 206;
-    width: 200;
-    height: 25;
-
-    # ポイントされたときの効果音
-    pointse: btn-change.ogg;
-
-    # クリックされたときの効果音
-    clickse: click.ogg;
-
-    # 読み上げテキスト
-    alt: このボタンはフルスクリーンモードに移行するものです。;
-}
-
-# ウィンドウモードへの切り替えボタン
-WINDOW {
-    # 種類:ウィンドウ
-    type: window;
-
-    # 座標とサイズ
-    x: 995;
-    y: 206;
-    width: 200;
-    height: 25;
-
-    # ポイントされたときの効果音
-    pointse: btn-change.ogg;
-
-    # クリックされたときの効果音
-    clickse: click.ogg;
-
-    # 読み上げテキスト
-    alt: このボタンはウィンドウモードに移行するものです。;
-}
-
 # すべて既定値に戻すボタン
 DEFAULT {
     # 種類:既定値
     type: default;
 
     # 座標とサイズ
-    x: 1131;
-    y: 61;
-    width: 115;
-    height: 40;
+    x: 908;
+    y: 39;
+    width: 326;
+    height: 73;
 
     # ポイントされたときの効果音
     pointse: btn-change.ogg;
@@ -277,10 +166,10 @@ TITLE {
     file: init.txt;
 
     # 座標とサイズ
-    x: 967;
-    y: 625;
-    width: 174;
-    height: 80;
+    x: 56;
+    y: 616;
+    width: 326;
+    height: 74;
 
     # ポイントされたときの効果音
     pointse: btn-change.ogg;

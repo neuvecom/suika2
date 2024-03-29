@@ -120,6 +120,6 @@ void set_last_en_command(void);
 void clear_last_en_command(void);
 
 /* ロード直後のメッセージボックスの内容を取得する */
-const char *get_pending_message(void);
+char *get_pending_message(void);
 
 #endif
