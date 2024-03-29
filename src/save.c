@@ -56,6 +56,12 @@ static char *chapter_name;
 /* 最後のメッセージ */
 static char *last_message;
 
+/* 最後のメッセージ(最後の継続部分を除く) */
+static char *prev_last_message;
+
+/* ロード直後に復元されるメッセージ */
+static char *pending_message;
+
 /* テキストの表示スピード */
 static float msg_text_speed;
 
@@ -161,6 +167,8 @@ bool init_save(void)
 		free(chapter_name);
 	if (last_message != NULL)
 		free(last_message);
+	if (prev_last_message != NULL)
+		free(prev_last_message);
 	chapter_name = strdup("");
 	last_message = strdup("");
 	if (chapter_name == NULL || last_message == NULL) {
@@ -508,25 +516,33 @@ static bool serialize_title(struct wfile *wf, int index)
 /* メッセージのシリアライズを行う */
 static bool serialize_message(struct wfile *wf, int index)
 {
+	const char *t;
 	size_t len;
 
-	/* 文字列を準備する */
+	/* メッセージの文字列を準備する */
 	strncpy(tmp_str, last_message, sizeof(tmp_str));
 	tmp_str[sizeof(tmp_str) - 1] = '\0';
 
-	/* 書き出す */
-	len = strlen(tmp_str) + 1;
-	if (write_wfile(wf, tmp_str, len) < len)
+	/* メッセージを書き出す */
+	t = last_message != NULL ? last_message : "";
+	len = strlen(t) + 1;
+	if (write_wfile(wf, t, len) < len)
 		return false;
 
 	/* メッセージを保存する */
 	if (index != -1) {
 		if (save_message[index] != NULL)
 			free(save_message[index]);
-		save_message[index] = strdup(tmp_str);
+		save_message[index] = strdup(t);
 		if (save_message[index] == NULL)
 			return false;
 	}
+
+	/* 継続行用のメッセージを書き出す */
+	t = prev_last_message != NULL ? last_message : "";
+	len = strlen(t) + 1;
+	if (write_wfile(wf, t, len) < len)
+		return false;
 
 	return true;
 }
@@ -993,8 +1009,19 @@ static bool deserialize_all(const char *fname)
 			if (!set_chapter_name(tmp_str))
 				break;
 
-		/* メッセージを読み込む (読み飛ばす) */
+		/* 継続行用のメッセージを読み込む */
 		gets_rfile(rf, tmp_str, sizeof(tmp_str));
+		if (strcmp(tmp_str, "") != 0) {
+			pending_message = strdup(tmp_str);
+			if (pending_message == NULL) {
+				log_memory();
+				break;
+			}
+		} else {
+			if (pending_message != NULL)
+				free(pending_message);
+			pending_message = NULL;
+		}
 
 		/* サムネイルを読み込む (読み飛ばす) */
 		img_size = (size_t)(conf_save_data_thumb_width *
@@ -1630,10 +1657,33 @@ const char *get_chapter_name(void)
 /*
  * 最後のメッセージを設定する
  */
-bool set_last_message(const char *msg)
+bool set_last_message(const char *msg, bool is_append)
 {
-	free(last_message);
+	/* 継続行のとき */
+	if (is_append) {
+		char *new_text;
+		size_t prev_len = 0, next_len = 0;
+		if (last_message != NULL)
+			prev_len = strlen(last_message);
+		next_len = strlen(msg);
+		new_text = malloc(prev_len + next_len + 1);
+		if (new_text == NULL) {
+			log_memory();
+			return false;
+		}
+		if (last_message != NULL) {
+			strcpy(new_text, last_message);
+			prev_last_message = last_message;
+			last_message = NULL;
+		} else {
+			strcpy(new_text, msg);
+		}
+		last_message = new_text;
+		return true;
+	}
 
+	/* 継続行でないとき */
+	free(last_message);
 	last_message = strdup(msg);
 	if (last_message == NULL) {
 		log_memory();
@@ -1692,4 +1742,21 @@ void set_last_en_command(void)
 void clear_last_en_command(void)
 {
 	last_en_command = -1;
+}
+
+/*
+ * メッセージボックスのテキスト
+ */
+
+const char *get_pending_message(void)
+{
+	const char *ret;
+
+	ret = pending_message;
+	if (pending_message != NULL) {
+		free(pending_message);
+		pending_message = NULL;
+	}
+
+	return ret;
 }

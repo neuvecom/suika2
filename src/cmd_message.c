@@ -383,6 +383,7 @@ static bool is_collapsed_sysmenu_pointed_extended(void);
 
 /* blit描画処理 */
 static void blit_frame(void);
+static void blit_pending_message(void);
 static bool is_end_of_msg(void);
 static void blit_msgbox(void);
 static void inline_wait_hook(float wait_time);
@@ -996,7 +997,7 @@ static bool init_msg_top(void)
 	}
 
 	/* セーブ用にメッセージを保存する */
-	if (!set_last_message(exp_msg)) {
+	if (!set_last_message(exp_msg, is_continue_mode)) {
 		free(exp_msg);
 		return false;
 	}
@@ -2481,6 +2482,9 @@ static int get_pointed_sysmenu_item_extended(void)
 /* フレーム描画を行う */
 static void blit_frame(void)
 {
+	/* ロード直後にdim部分のテキストを描画する */
+	blit_pending_message();
+
 	/* メッセージボックス非表示中は処理しない */
 	if (is_hidden)
 		return;
@@ -2516,6 +2520,57 @@ static void blit_frame(void)
 		if (!is_sysmenu_finished)
 			set_click();
 	}
+}
+
+static void blit_pending_message(void)
+{
+	struct draw_msg_context text_context;
+	const char *text;
+	int len;
+
+	text = get_pending_message();
+	if (text == NULL)
+		return;
+
+	construct_draw_msg_context(
+		&text_context,
+		LAYER_MSG,
+		text,
+		conf_font_select,
+		conf_font_size,
+		conf_font_size,
+		conf_font_ruby_size,
+		!conf_font_outline_remove,
+		2 + conf_font_outline_add,
+		pen_x,
+		pen_y,
+		msgbox_w,
+		msgbox_h,
+		conf_msgbox_margin_left,
+		conf_msgbox_margin_right,
+		conf_msgbox_margin_top,
+		conf_msgbox_margin_bottom,
+		conf_msgbox_margin_line,
+		conf_msgbox_margin_char,
+		body_color,
+		body_outline_color,
+		conf_msgbox_dim,
+		false,	/* ignore_linefeed */
+		false,	/* ignore_font */
+		false,	/* ignore_outline */
+		false,	/* ignore_color */
+		false,	/* ignore_size */
+		false,	/* ignore_position */
+		false,	/* ignore_ruby */
+		false,	/* ignore_wait */
+		conf_msgbox_fill,
+		inline_wait_hook,
+		conf_msgbox_tategaki);
+
+	len = count_chars_common(&text_context);
+	draw_msg_common(&text_context, len);
+
+	get_pen_position_common(&msgbox_context, &pen_x, &pen_y);
 }
 
 /* メッセージ本文の描画が完了しているか */

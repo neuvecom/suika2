@@ -556,7 +556,7 @@ void render_kirakira(void);
 const char *get_layer_text(int text_layer_index);
 
 /* テキストレイヤのテキストを設定する */
-bool set_layer_text(int text_layer_index, const char *msg);
+bool set_layer_text(int textlayer_index, const char *msg);
 
 /*
  * Debug

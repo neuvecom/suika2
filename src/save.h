@@ -96,7 +96,7 @@ bool set_chapter_name(const char *name);
 const char *get_chapter_name(void);
 
 /* 最後のメッセージを設定する */
-bool set_last_message(const char *msg);
+bool set_last_message(const char *msg, bool is_append);
 
 /* テキストレイヤのテキストを設定する */
 bool set_layer_text(int text_layer_index, const char *msg);
@@ -118,5 +118,8 @@ void set_last_en_command(void);
 
 /* 最後の+en+コマンドの位置を消去する */
 void clear_last_en_command(void);
+
+/* ロード直後のメッセージボックスの内容を取得する */
+const char *get_pending_message(void);
 
 #endif

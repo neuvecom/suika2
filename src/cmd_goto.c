@@ -73,7 +73,7 @@ bool goto_command(bool *cont)
 		render_stage();
 
 		/* 最後のメッセージを空白にする */
-		set_last_message("");
+		set_last_message("", false);
 
 		/* 最後のコマンドを実行中なら、セーブできない */
 		if (is_final_command()) {

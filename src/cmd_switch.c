@@ -888,7 +888,7 @@ static bool init_switch(void)
 		parent_button[i].msg = p;
 		if (is_first) {
 			/* 最後のメッセージとして保存する */
-			if (!set_last_message(p))
+			if (!set_last_message(p, false))
 				return false;
 			is_first = false;
 		}
