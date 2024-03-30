@@ -885,7 +885,7 @@ bool MainWindow::copyFiles(QString src, QString dst)
 
         QFile dstFile(dstPath);
         if (dstFile.exists()) {
-            printf("Removing %s\n", dstPath);
+            printf("Removing %s\n", dstPath.toUtf8().data());
             dstFile.remove();
         }
 

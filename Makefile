@@ -7,10 +7,17 @@ suika-linux:
 		echo 'Run on Linux.'; \
 		exit 1; \
 	fi;
-	@cd build/engine-linux && \
+	@if [ ! -z "`uname | grep FreeBSD`" ]; then \
+		cd build/engine-linux && \
+		gmake -f Makefile.freebsd -j8 && \
+		gmake -f Makefile.freebsd install && \
+		cd ../..; \
+	else \
+		cd build/engine-linux && \
 		make -f Makefile.linux -j8 && \
 		make -f Makefile.linux install && \
-		cd ../..
+		cd ../..; \
+	fi
 
 suika-pro:
 	@if [ ! -z "`uname | grep Darwin`" ]; then \
