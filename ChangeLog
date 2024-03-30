@@ -5,12 +5,17 @@ This file is referred by some automatic release scripts.
 [Release History (Japanese)]
 
 <!-- BEGIN-LATEST-JP -->
+<li>Suika2/17.37 2024/3/30
+  <ul>
+    <li>拡張子を.txtから専用の.s2scなどへ変更 (Thanks to all!)</li>
+  </ul>
+</li>
+<!-- END-LATEST-JP -->
 <li>Suika2/17.36 2024/3/30
   <ul>
     <li>縦書きUIの完成 (by あさつき)</li>
   </ul>
 </li>
-<!-- END-LATEST-JP -->
 <li>Suika2/17.35 2024/3/30
   <ul>
     <li>縦書きUIの完成 (by あさつき)</li>
@@ -1906,12 +1911,17 @@ This file is referred by some automatic release scripts.
 [Release History (English)]
 
 <!-- BEGIN-LATEST-EN -->
+<li>Suika2/17.37 2024/3/30
+  <ul>
+    <li>Changed the extensions (Thanks to all!)</li>
+  </ul>
+</li>
+<!-- END-LATEST-EN -->
 <li>Suika2/17.36 2024/3/30
   <ul>
     <li>Completion of The Japanese Vertical Template (by Asatsuki)</li>
   </ul>
 </li>
-<!-- END-LATEST-EN -->
 <li>Suika2/17.35 2024/3/30
   <ul>
     <li>Completion of The Japanese Vertical Template (by Asatsuki)</li>
