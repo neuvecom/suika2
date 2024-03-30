@@ -158,20 +158,6 @@
                                             <action selector="onOpenGame:" target="rdk-rJ-M5M" id="qhj-gr-3qj"/>
                                         </connections>
                                     </button>
-                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pZP-WC-Nqz">
-                                        <rect key="frame" x="32" y="85" width="130" height="123"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="square" title="Japanese Voice" alternateTitle="Japanese ADV" bezelStyle="shadowlessSquare" imagePosition="above" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="DEh-6A-3y0">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                            <connections>
-                                                <binding destination="rul-NS-Req" name="image" keyPath="values" id="zVL-83-a39"/>
-                                            </connections>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="onCreateAdvJpVoiceGame:" target="rdk-rJ-M5M" id="h1f-No-dU8"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                             </customView>
                             <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z6f-Dy-hNJ" customClass="GameView">
@@ -309,7 +295,6 @@
                         <outlet property="buttonContinue" destination="yIG-my-sHy" id="57H-oW-hab"/>
                         <outlet property="buttonEnglishAdv" destination="R9i-iZ-WL3" id="c1X-T8-gyj"/>
                         <outlet property="buttonEnglishNvl" destination="esJ-vp-RL5" id="gWW-o5-fwa"/>
-                        <outlet property="buttonJapaneseAdv" destination="pZP-WC-Nqz" id="LdQ-fV-lpR"/>
                         <outlet property="buttonJapaneseAdvDark" destination="dk3-hT-IiK" id="ufc-Mq-emE"/>
                         <outlet property="buttonJapaneseNvl" destination="syw-nI-k6c" id="gYW-Iq-Hh8"/>
                         <outlet property="buttonJapaneseVertical" destination="2IH-KC-u4x" id="63h-QB-3ho"/>

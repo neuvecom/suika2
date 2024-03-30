@@ -536,11 +536,6 @@ static ViewController *theViewController;
         [self setupView];
 }
 
-- (IBAction)onCreateAdvJpVoiceGame:(id)sender {
-    if ([self createProject:@"japanese"])
-        [self setupView];
-}
-
 - (IBAction)onCreateAdvEnGame:(id)sender {
     if ([self createProject:@"english"])
         [self setupView];

@@ -1,14 +1,14 @@
 ***CREDIT***
 
-Poniko (ぽにこ):
+Poniko (ぽにこ) (copyright was yielded to ktabata):
   001-angry.png
   001-fun.png
   001-happy.png
   001-normal.png
   001-sad.png
 
-レタッチ by SOrow:
-  001-normal_eye.png
+SOrow:
+  001-fun_eye.png
 
 Becta (Ｂecta) (copyright was yielded to ktabata):
   luxion.png

@@ -40,7 +40,7 @@ window.resize=2
 #  - 指定しなければ window.width と window.height が利用される
 #  - 今のところWindows専用
 #window.default.width=0
-#window.default.height=0
+#window.default.heigth=0
 
 ###
 ### フォントの設定
@@ -60,7 +60,7 @@ font.select=0
 #  - コンフィグ画面で選択されるフォント
 #  - グローバルセーブデータに保存される
 #  - このフォント名はセーブデータがないときの初期値として必須
-font.file=yasashisa.ttf
+font.file=07LogoTypeGothic7.ttf
 
 # [メインフォント] (省略可)
 #  - ゲーム内からは変更できないコンフィグ
@@ -75,7 +75,7 @@ font.file=yasashisa.ttf
 #font.alt2.file=
 
 # [メッセージのフォントサイズ]
-font.size=38
+font.size=34
 
 # [メッセージのフォントの色]
 font.color.r=255
@@ -88,9 +88,9 @@ font.color.b=255
 font.outline.remove=0
 
 # [メッセージのフォントのふちどりの色] (省略可)
-font.outline.color.r=128
-font.outline.color.g=128
-font.outline.color.b=128
+font.outline.color.r=64
+font.outline.color.g=64
+font.outline.color.b=64
 
 # [メッセージのフォントのふちどりのを太くする量] (省略可)
 # -  0: デフォルトの2ピクセル
@@ -118,24 +118,20 @@ namebox.font.select=0
 
 # [名前ボックスのフォントサイズ] (省略可)
 #  - 0を指定するか省略するとメッセージと同じになる
-namebox.font.size=38
+namebox.font.size=30
 
 # [名前ボックスのフォントのふちどり] (省略可)
 #  - 0: メッセージボックスと同じ設定
 #  - 1: ふちどりあり
 #  - 2: ふちどりなし
-#  - 3: ふちどりあり(メッセージボックス設定1px)
-#  - 4: ふちどりあり(メッセージボックス設定2px)
-#  - 5: ふちどりあり(メッセージボックス設定3px)
-#  - 6: ふちどりあり(メッセージボックス設定4px)
 namebox.font.outline=0
 
 # [名前ボックス画像を表示する位置]
-namebox.x=95
-namebox.y=480
+namebox.x=80
+namebox.y=505
 
 # [名前ボックス画像内のテキスト上端マージン]
-namebox.margin.top=6
+namebox.margin.top=4
 
 # [名前の中央揃え] (省略可)
 #  - 0: 中央揃え
@@ -161,17 +157,17 @@ msgbox.bg.file=system/msgbox/idle.png
 msgbox.fg.file=system/msgbox/hover.png
 
 # [メッセージボックス画像を表示する位置]
-msgbox.x=43
-msgbox.y=503
+msgbox.x=0
+msgbox.y=491
 
 # [メッセージボックス画像内のテキスト左端マージン]
-msgbox.margin.left=80
+msgbox.margin.left=195
 
 # [メッセージボックス画像内のテキスト上端マージン]
-msgbox.margin.top=50
+msgbox.margin.top=88
 
 # [メッセージボックス画像内のテキスト右端マージン]
-msgbox.margin.right=80
+msgbox.margin.right=195
 
 # [メッセージボックス画像内のテキスト下端マージン]
 msgbox.margin.bottom=50
@@ -187,10 +183,10 @@ msgbox.speed=40.0
 
 # [メッセージボックスを非表示にするボタンの座標] (省略可)
 #  - メッセージボックス内の座標
-msgbox.btn.hide.x=1146
-msgbox.btn.hide.y=16
-msgbox.btn.hide.width=29
-msgbox.btn.hide.height=29
+msgbox.btn.hide.x=1215
+msgbox.btn.hide.y=65
+msgbox.btn.hide.width=50
+msgbox.btn.hide.height=50
 
 # [サンプルでは未使用]
 # メッセージボックス内のセーブボタンの座標(メッセージボックス内の座標, 省略可)
@@ -270,18 +266,17 @@ msgbox.auto.cancel.se=click.ogg
 msgbox.skip.cancel.se=click.ogg
 
 # [未読でもスキップする] (省略可)
-#  - 0: Ctrlキーとスキップモードで、既読のみスキップ
-#  - 1: Ctrlキーとスキップモードで、未読でもスキップ
-#  - 2: Ctrlキーは未読でもスキップ、スキップモードでは未読メッセージで停止
+#  - 0: スキップしない
+#  - 1: スキップする
 msgbox.skip.unseen=0
 
 # [既読メッセージの色を変更する] (省略可)
 #  - color=0: 無効(通常)
 #  - color=1: 有効(色を変更する)
 msgbox.seen.color=0
-msgbox.seen.color.r=80
-msgbox.seen.color.g=80
-msgbox.seen.color.b=80
+msgbox.seen.color.r=128
+msgbox.seen.color.g=128
+msgbox.seen.color.b=128
 msgbox.seen.outline.color.r=40
 msgbox.seen.outline.color.g=40
 msgbox.seen.outline.color.b=40
@@ -359,14 +354,10 @@ switch.font.size=38
 #  - 0: メッセージボックスと同じ設定
 #  - 1: ふちどりあり
 #  - 2: ふちどりなし
-#  - 3: ふちどりあり(メッセージボックス設定1px)
-#  - 4: ふちどりあり(メッセージボックス設定2px)
-#  - 5: ふちどりあり(メッセージボックス設定3px)
-#  - 6: ふちどりあり(メッセージボックス設定4px)
 switch.font.outline=0
 
 # [選択肢の位置]
-switch.x=406
+switch.x=200
 switch.y=129
 
 # [選択肢の間の縦方向マージン]
@@ -375,27 +366,16 @@ switch.margin.y=20
 # [選択肢画像のテキストの縦方向マージン]
 switch.text.margin.y=12
 
-# [ポイントされていない項目のテキスト色]
-#  - inactive=0: 無効
-#  - inactive=1: 有効
-switch.color.inactive=1
-switch.color.inactive.body.r=255
-switch.color.inactive.body.g=255
-switch.color.inactive.body.b=255
-switch.color.inactive.outline.r=128
-switch.color.inactive.outline.g=128
-switch.color.inactive.outline.b=128
-
 # [ポイントされた項目のテキスト色] (省略可)
 #  - active=0: 無効
 #  - active=1: 有効
 switch.color.active=0
-switch.color.active.body.r=255
-switch.color.active.body.g=0
-switch.color.active.body.b=0
-switch.color.active.outline.r=128
-switch.color.active.outline.g=128
-switch.color.active.outline.b=128
+switch.color.active.body.r=128
+switch.color.active.body.g=64
+switch.color.active.body.b=64
+switch.color.active.outline.r=255
+switch.color.active.outline.g=255
+switch.color.active.outline.b=255
 
 # [選択肢を選択したときの効果音] (省略可)
 switch.parent.click.se.file=click.ogg
@@ -408,7 +388,6 @@ switch.change.se=btn-change.ogg
 
 # [選択肢ごとに画像や位置を変える場合] (省略可)
 #  - 指定しなければ縦方向にswitch.margin.yピクセルの間隔で配置される
-#switch.bg.file2=switch-bg-2.png
 #switch.fg.file2=switch-fg-2.png
 #switch.x2=200
 #switch.y2=200
@@ -426,12 +405,12 @@ switch.change.se=btn-change.ogg
 #switch.y5=500
 #switch.bg.file6=switch-bg-2.png
 #switch.fg.file6=switch-fg-2.png
-#switch.x7=200
-#switch.y7=600
+#switch.x6=200
+#switch.y6=600
 #switch.bg.file7=switch-bg-2.png
 #switch.fg.file7=switch-fg-2.png
-#switch.x8=200
-#switch.y85=700
+#switch.x7=200
+#switch.y7=700
 
 ###
 ### セーブ・ロード画面の設定
@@ -446,8 +425,8 @@ save.data.thumb.height=120
 ###
 
 # [システムメニュー画像の座標]
-sysmenu.x=731
-sysmenu.y=29
+sysmenu.x=558
+sysmenu.y=15
 
 # [システムメニュー画像(通常時)のファイル名]
 sysmenu.idle.file=system/sysmenu/idle.png
@@ -462,82 +441,80 @@ sysmenu.disable.file=system/sysmenu/disable.png
 
 # [システムメニューのクイックセーブボタンの座標]
 #  - システムメニュー画像内での座標
-sysmenu.qsave.x=62
-sysmenu.qsave.y=7
-sysmenu.qsave.width=60
-sysmenu.qsave.height=58
+sysmenu.qsave.x=80
+sysmenu.qsave.y=0
+sysmenu.qsave.width=80
+sysmenu.qsave.height=80
 
 # [システムメニューのクイックロードボタンの座標]
 #  - システムメニュー画像内での座標
-sysmenu.qload.x=123
-sysmenu.qload.y=7
-sysmenu.qload.width=60
-sysmenu.qload.height=58
+sysmenu.qload.x=160
+sysmenu.qload.y=0
+sysmenu.qload.width=80
+sysmenu.qload.height=80
 
 # [システムメニューのセーブボタンの座標]
 #  - システムメニュー画像内での座標
-sysmenu.save.x=184
-sysmenu.save.y=7
-sysmenu.save.width=60
-sysmenu.save.height=58
+sysmenu.save.x=240
+sysmenu.save.y=0
+sysmenu.save.width=80
+sysmenu.save.height=80
 
 # [システムメニューのロードボタンの座標]
 #  - システムメニュー画像内での座標
-sysmenu.load.x=245
-sysmenu.load.y=7
-sysmenu.load.width=60
-sysmenu.load.height=58
+sysmenu.load.x=320
+sysmenu.load.y=0
+sysmenu.load.width=80
+sysmenu.load.height=80
 
 # [システムメニューのオートボタンの座標]
 #  - システムメニュー画像内での座標
-sysmenu.auto.x=306
-sysmenu.auto.y=7
-sysmenu.auto.width=60
-sysmenu.auto.height=58
+sysmenu.auto.x=400
+sysmenu.auto.y=0
+sysmenu.auto.width=80
+sysmenu.auto.height=80
 
 # [システムメニューのスキップボタンの座標]
 #  - システムメニュー画像内での座標
-sysmenu.skip.x=367
-sysmenu.skip.y=7
-sysmenu.skip.width=60
-sysmenu.skip.height=58
+sysmenu.skip.x=480
+sysmenu.skip.y=0
+sysmenu.skip.width=80
+sysmenu.skip.height=80
 
 # [システムメニューのヒストリボタンの座標]
 #  - システムメニュー画像内での座標
-sysmenu.history.x=428
-sysmenu.history.y=7
-sysmenu.history.width=60
-sysmenu.history.height=58
+sysmenu.history.x=560
+sysmenu.history.y=0
+sysmenu.history.width=80
+sysmenu.history.height=80
 
 # [システムメニューのコンフィグボタンの座標]
 #  - システムメニュー画像内での座標
-sysmenu.config.x=489
-sysmenu.config.y=7
-sysmenu.config.width=60
-sysmenu.config.height=58
+sysmenu.config.x=640
+sysmenu.config.y=0
+sysmenu.config.width=80
+sysmenu.config.height=80
 
 # [サンプルでは未使用]
-#  - システムメニューのユーザ定義ボタン1の座標(システムメニュー画像内での座標) (省略可)
-#  - gui/custom1.txtが呼び出される
+# システムメニューのユーザ定義ボタン1の座標(システムメニュー画像内での座標) (省略可)
 #sysmenu.custom1.x=0
 #sysmenu.custom1.y=0
 #sysmenu.custom1.width=0
 #sysmenu.custom1.height=0
 
 # [サンプルでは未使用]
-#  - システムメニューのユーザ定義ボタン1が選択されたときのSE(省略可)
+# システムメニューのユーザ定義ボタン1が選択されたときのSE(省略可)
 #sysmenu.custom1.se=click.ogg
 
 # [サンプルでは未使用]
-#  - システムメニューのユーザ定義ボタン2の座標(システムメニュー画像内での座標) (省略可)
-#  - gui/custom2.txtが呼び出される
+# システムメニューのユーザ定義ボタン2の座標(システムメニュー画像内での座標) (省略可)
 #sysmenu.custom2.x=0
 #sysmenu.custom2.y=0
 #sysmenu.custom2.width=0
 #sysmenu.custom2.height=0
 
 # [サンプルでは未使用]
-# - システムメニューのユーザ定義ボタン2が選択されたときのSE(省略可)
+# システムメニューのユーザ定義ボタン2が選択されたときのSE(省略可)
 #sysmenu.custom2.se=click.ogg
 
 # [システムメニューを呼び出すときのSE] (省略可)
@@ -574,8 +551,8 @@ sysmenu.history.se=click.ogg
 sysmenu.config.se=click.ogg
 
 # [折りたたみシステムメニュー画像の座標]
-sysmenu.collapsed.x=1219
-sysmenu.collapsed.y=29
+sysmenu.collapsed.x=1200
+sysmenu.collapsed.y=15
 
 # [折りたたみシステムメニュー画像(通常時)のファイル名]
 sysmenu.collapsed.idle.file=system/sysmenu-collapsed/idle.png
@@ -636,7 +613,7 @@ gui.save.font.select=0
 
 # [セーブのフォントサイズ] (省略可)
 #  - 0を指定するか省略するとメッセージと同じになる
-gui.save.font.size=38
+gui.save.font.size=30
 
 # [セーブのフォントのふちどり] (省略可)
 #  - 0: メッセージボックスと同じ設定
@@ -665,7 +642,7 @@ gui.history.font.select=0
 
 # [ヒストリのフォントサイズ] (省略可)
 #  - 0を指定するか省略するとメッセージと同じになる
-gui.history.font.size=38
+gui.history.font.size=30
 
 # [ヒストリのフォントのふちどり] (省略可)
 #  - 0: メッセージボックスと同じ設定
@@ -681,7 +658,7 @@ gui.history.font.outline=0
 gui.history.font.ruby.size=16
 
 # [ヒストリの行間] (省略可)
-gui.history.margin.line=55
+gui.history.margin.line=48
 
 # [ヒストリの縦書き] (省略可)
 #  - 0: 横書き
@@ -698,22 +675,17 @@ gui.history.disable.color=0
 gui.history.font.color.r=255
 gui.history.font.color.g=255
 gui.history.font.color.b=255
-gui.history.font.outline.color.r=128
-gui.history.font.outline.color.g=128
-gui.history.font.outline.color.b=128
+gui.history.font.outline.color.r=64
+gui.history.font.outline.color.g=64
+gui.history.font.outline.color.b=64
 
 # [ヒストリーの名前直後に改行を入れるためのコンフィグ]
 #  - \nを指定すると改行できる
-#gui.history.quote.prefix=\n
+gui.history.quote.prefix=\n
 
 # [ヒストリーのカギカッコ]
 gui.history.quote.start=「
 gui.history.quote.end=」
-
-# [ヒストリー内で改行を行わない]
-#  - 0: 改行する
-#  - 1: 改行を無視する
-gui.history.oneline=0
 
 # [プレビューの縦書き] (省略可)
 #  - 0: 横書き
@@ -758,13 +730,13 @@ serif.color.name.only=1
 
 # [キャラクタごとの色設定]
 #  - 以降、serif.color64まで続くが、すべて省略可能
-serif.color1.name=みどり
-serif.color1.r=100
-serif.color1.g=255
-serif.color1.b=100
-serif.color1.outline.r=128
-serif.color1.outline.g=128
-serif.color1.outline.b=128
+serif.color1.name=星崎・スタレ・涼子
+serif.color1.r=155
+serif.color1.g=210
+serif.color1.b=180
+serif.color1.outline.r=32
+serif.color1.outline.g=64
+serif.color1.outline.b=48
 
 ###
 ### キャラクタ名と画像ファイルのマッピング
@@ -875,7 +847,7 @@ window.fullscreen.disable=0
 window.maximize.disable=0
 
 # [ウィンドウタイトルと章タイトルの間のセパレータ] (省略可)
-window.title.separator= - 
+window.title.separator= -
 
 # [章タイトルをウィンドウタイトルに反映しない] (省略可)
 #  - 0: 反映する
@@ -927,7 +899,7 @@ tts.enable=0
 #  0: 無効
 #  1: Vキーで有効/無効にできる (視覚障害者モード)
 #  2: Vキーで有効/無効にできる (晴眼者モード)
-tts.user=0
+tts.user=1
 
 ###
 ### 言語設定 (省略可)
@@ -938,7 +910,7 @@ tts.user=0
 # locale.force=en
 
 # [言語マッピング] (省略可)
-#  - language.xx=yyとは、OSの言語設定がxxのとき、シナリオの言語yyを使う、の意味(+yy+の表記のこと)
+#  - OSの言語設定がxxのとき、シナリオのyyの言語を使う、の意味(+yy+の表記のこと)
 #  - 初めはすべてjaにしておいて、翻訳できた言語から順にマッピングを変える、などが可能
 language.en=en
 language.fr=fr
