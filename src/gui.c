@@ -2619,11 +2619,8 @@ static void process_save(int button_index)
 	play_sys_se(button[button_index].clickse);
 
 	/* "@gui save.txt"の場合は、次のコマンドに進めておく */
-	if (!is_sys_gui && !did_save) {
-		if (!move_to_next_command())
-			return;
+	if (!is_sys_gui && !did_save)
 		did_save = true;
-	}
 
 	/* セーブを実行する */
 	execute_save(data_index);

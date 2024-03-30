@@ -138,8 +138,7 @@ static bool cleanup(void)
 	 * 右クリックでキャンセルされた場合で、
 	 * セーブされていなければ、次のコマンドへ移動する
 	 */
-	if (!is_gui_saved())
-		ret = move_to_next_command();
+	ret = move_to_next_command();
 
 	cleanup_gui();
 
