@@ -5,12 +5,17 @@ This file is referred by some automatic release scripts.
 [Release History (Japanese)]
 
 <!-- BEGIN-LATEST-JP -->
+<li>Suika2/17.41 2024/3/30
+  <ul>
+    <li>FreeBSD</li>
+  </ul>
+</li>
+<!-- END-LATEST-JP -->
 <li>Suika2/17.40 2024/3/30
   <ul>
     <li>素材のサイズを削減</li>
   </ul>
 </li>
-<!-- END-LATEST-JP -->
 <li>Suika2/17.39 2024/3/30
   <ul>
     <li>system.txtからsystem.guiに変更</li>
@@ -1926,12 +1931,17 @@ This file is referred by some automatic release scripts.
 [Release History (English)]
 
 <!-- BEGIN-LATEST-EN -->
+<li>Suika2/17.41 2024/3/30
+  <ul>
+    <li>FreeBSD</li>
+  </ul>
+</li>
+<!-- END-LATEST-EN -->
 <li>Suika2/17.40 2024/3/30
   <ul>
     <li>reduced the size of the assets</li>
   </ul>
 </li>
-<!-- END-LATEST-EN -->
 <li>Suika2/17.39 2024/3/30
   <ul>
     <li>system.txt to system.gui</li>
