@@ -467,8 +467,15 @@ static BOOL InitApp(HINSTANCE hInstance, int nCmdShow)
 
 	/* Open a project file if specified in argv[1]. */
 	if (__argc >= 2)
+	{
+		if (__argc >= 4)
+		{
+			if (!set_startup_file_and_line(conv_utf16_to_utf8(__wargv[2]), (int)wcstol(__wargv[3], NULL, 10)))
+				return FALSE;
+		}
 		if (OpenProjectAtPath(__wargv[1]))
 			StartGame();
+	}
 
 	SetTimer(hWndMain, ID_TIMER_FORMAT, 1000, OnTimerFormat);
 

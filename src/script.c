@@ -785,7 +785,7 @@ bool init_script(void)
 
 #ifndef USE_EDITOR
 	/* スクリプトをロードする */
-	if (check_file_exist(TXT_DIR, INIT_FILE)) {
+	if (check_file_exist(SCENARIO_DIR, INIT_FILE)) {
 		if (!load_script(INIT_FILE))
 			return false;
 	} else {
@@ -2929,6 +2929,18 @@ static void show_parse_error_footer(int index, const char *raw)
  */
 #ifdef USE_EDITOR
 
+/* スタートアップ位置を指定する */
+bool set_startup_file_and_line(const char *file, int line)
+{
+	startup_file = strdup(file);
+	if (startup_file == NULL) {
+		log_memory();
+		return false;
+	}
+	startup_line = line;
+	return true;
+}
+
 /* パースエラーから回復する */
 static void recover_from_parse_error(int cmd_index, const char *raw)
 {
@@ -2997,20 +3009,6 @@ static bool add_comment_line(const char *s, ...)
 	}
 
 	INC_OUTPUT_LINE();
-	return true;
-}
-
-/*
- * スタートアップファイル/ラインを指定する
- */
-bool set_startup_file_and_line(const char *file, int line)
-{
-	startup_file = strdup(file);
-	if (startup_file == NULL) {
-		log_memory();
-		return false;
-	}
-	startup_line = line;
 	return true;
 }
 

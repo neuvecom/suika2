@@ -33,7 +33,7 @@
  *  - 2022-10-19 Added locales
  *  - 2023-01-06 Removed unused parameter indices
  *  - 2023-01-06 Added Japanese command names, parameter names and quotations
- *  - 2023-01-14 Added startup file and line (later removed)
+ *  - 2023-01-14 Added startup file and line
  *  - 2023-08-14 Added using
  *  - 2022-08-14 Added @ichoose
  *  - 2023-08-20 Added @anime
@@ -691,6 +691,9 @@ int get_command_count(void);
  * For Suika2 Pro
  */
 #if defined(USE_EDITOR)
+
+/* スタートアップ位置を指定する */
+bool set_startup_file_and_line(const char *file, int line);
 
 /* using展開後のコマンドの行番号を取得する(ログ用) */
 int get_expanded_line_num(void);
