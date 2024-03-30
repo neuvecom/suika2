@@ -28,22 +28,22 @@
  */
 
 /* コンフィグのGUIファイル */
-#define CONFIG_GUI_FILE		"system.txt"
+#define CONFIG_GUI_FILE		"system.gui"
 
 /* セーブGUIファイル */
-#define SAVE_GUI_FILE		"save.txt"
+#define SAVE_GUI_FILE		"save.gui"
 
 /* ロードGUIファイル */
-#define LOAD_GUI_FILE		"load.txt"
+#define LOAD_GUI_FILE		"load.gui"
 
 /* ヒストリのGUIファイル */
-#define HISTORY_GUI_FILE	"history.txt"
+#define HISTORY_GUI_FILE	"history.gui"
 
 /* custom1のGUIファイル */
-#define CUSTOM1_GUI_FILE	"custom1.txt"
+#define CUSTOM1_GUI_FILE	"custom1.gui"
 
 /* custom2のGUIファイル */
-#define CUSTOM2_GUI_FILE	"custom2.txt"
+#define CUSTOM2_GUI_FILE	"custom2.gui"
 
 /*
  * 入力の状態

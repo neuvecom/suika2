@@ -160,7 +160,7 @@ TITLE {
     type: title;
 
     # The title script.
-    file: init.txt;
+    file: init.s2sc;
 
     # Position and size.
     x: 967;

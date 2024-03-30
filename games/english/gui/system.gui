@@ -211,34 +211,13 @@ DEFAULT {
     clickse: click.ogg;
 }
 
-# Config Page 2 Button
-PAGE2 {
-    # Jump-to-other-GUI type
-    type: gui;
-
-    # GUI file name
-    file: system-page2.txt;
-
-    # Position and size
-    x: 1234;
-    y: 132;
-    width: 35;
-    height: 35;
-
-    # Sound effect when pointed
-    pointse: btn-change.ogg;
-
-    # Sound effect when clicked
-    clickse: click.ogg;
-}
-
 # Back to Title Button
 TITLE {
     # Back-to-Title type
     type: title;
 
     # Title script file name
-    file: init.txt;
+    file: init.s2sc;
 
     # Position and size
     x: 1007;

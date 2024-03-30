@@ -1,14 +1,14 @@
 ###
-### Load Screen Definition
+### Save Screen Definition
 ###
 
 # Global settings for this file.
 global {
     # Use the following images.
-    base:   system/load/base.png;
-    idle:   system/load/idle.png;
-    hover:  system/load/hover.png;
-    active: system/load/active.png;
+    base:   system/save/base.png;
+    idle:   system/save/idle.png;
+    hover:  system/save/hover.png;
+    active: system/save/active.png;
 
     # Save data count per screen.
     saveslots: 3;
@@ -23,7 +23,7 @@ global {
     fadeout: 0.5;
 
     # Text-to-speech
-    alt: "The load screen is showing. Press left and right keys.";
+    alt: "The save screen is showing. Press left and right keys.";
 }
 
 # A button to return.
@@ -49,8 +49,8 @@ BACK {
 
 # The first save data item.
 SAVESLOT1 {
-    # Type: load
-    type: load;
+    # Type: save
+    type: save;
 
     # Save data index.
     index: 0;
@@ -76,13 +76,13 @@ SAVESLOT1 {
     clear-b: 255;
 
     # Text-to-speech
-    alt: "Press this button to load from the slot 1.";
+    alt: "Press this button to save to the slot 1.";
 }
 
 # The second save data item.
 SAVESLOT2 {
-    # Type: load
-    type: load;
+    # Type: save
+    type: save;
 
     # Save data index.
     index: 1;
@@ -108,13 +108,13 @@ SAVESLOT2 {
     clear-b: 255;
 
     # Text-to-speech
-    alt: "Press this button to load from the slot 2.";
+    alt: "Press this button to save to the slot 2.";
 }
 
 # The third save data item.
 SAVESLOT3 {
-    # Type: load
-    type: load;
+    # Type: save
+    type: save;
 
     # Save data index.
     index: 2;
@@ -140,7 +140,7 @@ SAVESLOT3 {
     clear-b: 255;
 
     # Text-to-speech
-    alt: "Press this button to load from the slot 3.";
+    alt: "Press this button to save to the slot 3.";
 }
 
 # A button for save data page 1
@@ -221,7 +221,7 @@ TITLE {
     type: title;
 
     # The title script.
-    file: init.txt;
+    file: init.s2sc;
 
     # Position and size.
     x: 967;

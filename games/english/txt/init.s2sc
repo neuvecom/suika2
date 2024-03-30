@@ -44,7 +44,7 @@
 @chapter "Menu"
 
 # Call the menu.
-@gui file=title.txt nofadein
+@gui file=title.gui nofadein
 
 # When START is selected:
 :START
@@ -53,15 +53,15 @@
 # When LOAD is selected:
 :LOAD
 @chapter Load
-@gui file=load.txt cancellable
+@gui file=load.gui cancellable
 @goto MENU
 
 # When CONFIG is selected:
 :CONFIG
 @chapter Config
-@gui system.txt cancellable
+@gui system.gui cancellable
 
-# Note that we'll come here only when system.txt is canceled
+# Note that we'll come here only when system.gui is canceled
 @goto MENU
 
 # When QUIT is selected:
@@ -257,7 +257,7 @@ If there's anything you want to customize, but can't, please contact the Team.
 *Midori*e031.ogg*I hope you'll send me an e-mail with your questions, feedback, issues, or even just to say hi! – See you next time!
 
 # Shake the message box.
-@anime msgbox-shake.txt sync,showmsgbox
+@anime msgbox-shake.anime sync,showmsgbox
 
 @vol bgm 0.0 1.0
 
@@ -283,4 +283,4 @@ You got through all the questions, thank you!
 :END
 
 # Reload this file.
-@load init.txt
+@load init.s2sc
