@@ -532,7 +532,7 @@ static ViewController *theViewController;
 }
 
 - (IBAction)onCreateAdvJpGame:(id)sender {
-    if ([self createProject:@"dark"])
+    if ([self createProject:@"japanese"])
         [self setupView];
 }
 

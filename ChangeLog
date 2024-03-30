@@ -5,12 +5,17 @@ This file is referred by some automatic release scripts.
 [Release History (Japanese)]
 
 <!-- BEGIN-LATEST-JP -->
+<li>Suika2/17.43 2024/3/30
+  <ul>
+    <li>Mac版のバグ修正</li>
+  </ul>
+</li>
+<!-- END-LATEST-JP -->
 <li>Suika2/17.42 2024/3/30
   <ul>
     <li>微調整</li>
   </ul>
 </li>
-<!-- END-LATEST-JP -->
 <li>Suika2/17.41 2024/3/30
   <ul>
     <li>FreeBSD</li>
@@ -1936,12 +1941,17 @@ This file is referred by some automatic release scripts.
 [Release History (English)]
 
 <!-- BEGIN-LATEST-EN -->
+<li>Suika2/17.43 2024/3/30
+  <ul>
+    <li>Fixed a bug of Mac version</li>
+  </ul>
+</li>
+<!-- END-LATEST-EN -->
 <li>Suika2/17.42 2024/3/30
   <ul>
     <li>minor fix</li>
   </ul>
 </li>
-<!-- END-LATEST-EN -->
 <li>Suika2/17.41 2024/3/30
   <ul>
     <li>FreeBSD</li>
