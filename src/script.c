@@ -785,8 +785,13 @@ bool init_script(void)
 
 #ifndef USE_EDITOR
 	/* スクリプトをロードする */
-	if (!load_script(INIT_FILE))
-		return false;
+	if (check_file_exist(TXT_DIR, INIT_FILE)) {
+		if (!load_script(INIT_FILE))
+			return false;
+	} else {
+		if (!load_script(COMPAT_INIT_FILE))
+			return false;
+	}
 #else
 	int i;
 
@@ -794,8 +799,18 @@ bool init_script(void)
 	 * 読み込むスクリプトが指定されていればそれを使用し、
 	 * そうでなければinit.txtを使用する
 	 */
-	if (!load_script(startup_file == NULL ? INIT_FILE : startup_file))
-		return false;
+	if (startup_file == NULL) {
+		if (check_file_exist(SCENARIO_DIR, INIT_FILE)) {
+			if (!load_script(INIT_FILE))
+				return false;
+		} else {
+			if (!load_script(COMPAT_INIT_FILE))
+				return false;
+		}
+	} else {
+		if (!load_script(startup_file))
+			return false;
+	}
 
 	/* 開始行が指定されていれば移動する */
 	if (startup_line > 0) {
@@ -1325,7 +1340,7 @@ static bool read_script_from_file(const char *fname, bool is_included)
 	cur_parse_line = 0;
 
 	/* ファイルをオープンする */
-	rf = open_rfile(SCRIPT_DIR, fname, false);
+	rf = open_rfile(SCENARIO_DIR, fname, false);
 	if (rf == NULL)
 		return false;
 
@@ -3550,7 +3565,7 @@ bool save_script(void)
 		return false;
 
 	/* パスを生成する */
-	path = make_valid_path(SCRIPT_DIR, cur_script);
+	path = make_valid_path(SCENARIO_DIR, cur_script);
 
 	/* ファイルをオープンする */
 	fp = fopen(path, "wb");

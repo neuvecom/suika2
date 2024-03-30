@@ -1375,7 +1375,7 @@ static VOID StartGame(void)
 
 	do {
 		assert(FILE_EXISTS("conf\\config.txt"));
-		assert(FILE_EXISTS("txt\\init.txt"));
+		assert(FILE_EXISTS("txt\\init.txt") || FILE_EXISTS("txt\\init.s2sc"));
 
 		/* Initialize the locale code. */
 		init_locale_code();
@@ -4162,7 +4162,7 @@ static VOID OnOpenScript(void)
 {
 	const wchar_t *pFile;
 
-	pFile = SelectFile(SCRIPT_DIR);
+	pFile = SelectFile(SCENARIO_DIR);
 	if (pFile == NULL)
 		return;
 
@@ -4224,12 +4224,12 @@ static const wchar_t *SelectFile(const char *pszDir)
 			L"動画ファイル\0*.mp4;*.wmv;\0すべてのファイル(*.*)\0*.*\0\0";
 		ofn.lpstrDefExt = L"ogg";
 	}
-	else if (strcmp(pszDir, SCRIPT_DIR) == 0 ||
+	else if (strcmp(pszDir, SCENARIO_DIR) == 0 ||
 			 strcmp(pszDir, GUI_DIR) == 0)
 	{
 		ofn.lpstrFilter = bEnglish ?
-			L"Text Files\0*.txt;\0All Files(*.*)\0*.*\0\0" : 
-			L"テキストファイル\0*.txt;\0すべてのファイル(*.*)\0*.*\0\0";
+			L"Scenario Files\0*.s2sc;Text Files\0*.txt;\0All Files(*.*)\0*.*\0\0" : 
+			L"シナリオファイル\0*.s2sc;テキストファイル\0*.txt;\0すべてのファイル(*.*)\0*.*\0\0";
 		ofn.lpstrDefExt = L"txt";
 	}
 
@@ -5338,7 +5338,7 @@ static VOID OnInsertLoad(void)
 {
 	const wchar_t *pFile;
 
-	pFile = SelectFile(SCRIPT_DIR);
+	pFile = SelectFile(SCENARIO_DIR);
 	if (pFile == NULL)
 		return;
 

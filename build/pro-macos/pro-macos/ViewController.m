@@ -589,7 +589,7 @@ static ViewController *theViewController;
     NSString *basePath = [[NSFileManager defaultManager] currentDirectoryPath];
     NSString *txtPath = [NSString stringWithFormat:@"%@/%@", basePath, @"txt"];
     NSOpenPanel *panel= [NSOpenPanel openPanel];
-    [panel setAllowedFileTypes:[NSArray arrayWithObjects:@"txt", @"stxt", @"ks", @"'TEXT'", nil]];
+    [panel setAllowedFileTypes:[NSArray arrayWithObjects:@"s2sc", @"txt", @"stxt", @"ks", @"'TEXT'", nil]];
     [panel setDirectoryURL:[[NSURL alloc] initFileURLWithPath:txtPath]];
     if ([panel runModal] == NSModalResponseOK) {
         NSString *choose = [[panel URL] path];
@@ -666,7 +666,7 @@ static ViewController *theViewController;
     // 開くダイアログを作る
     NSOpenPanel *panel= [NSOpenPanel openPanel];
     [panel setAllowedFileTypes:
-               [NSArray arrayWithObjects:@"txt", @"'TEXT'", nil]];
+               [NSArray arrayWithObjects:@"s2sc", @"txt", @"stxt", @"ks", @"'TEXT'", nil]];
     [panel setDirectoryURL:[[NSURL alloc] initFileURLWithPath:txtPath]];
     if ([panel runModal] == NSModalResponseOK) {
         NSString *file = [[panel URL] lastPathComponent];

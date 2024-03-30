@@ -89,7 +89,7 @@
 #define FONT_DIR	"font"
 
 /* The name of the scenario file firectory */
-#define SCRIPT_DIR	"txt"
+#define SCENARIO_DIR	"txt"
 
 /* The name of the GUI file firectory */
 #define GUI_DIR		"gui"
@@ -114,15 +114,16 @@
  */
 
 /* The log file name. */
-#define LOG_FILE	"log.txt"
+#define LOG_FILE		"log.txt"
 
 /* The package file name. */
-#define PACKAGE_FILE	"data01.arc"
+#define PACKAGE_FILE		"data01.arc"
 
 /* The config file name */
-#define CONFIG_FILE	"config.txt"
+#define CONFIG_FILE		"config.txt"
 
 /* The initial scenario file. */
-#define INIT_FILE	"init.txt"
+#define INIT_FILE		"init.s2sc"
+#define COMPAT_INIT_FILE	"init.txt"
 
 #endif
